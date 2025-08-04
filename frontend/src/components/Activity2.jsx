@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronRight, ChevronLeft, Lightbulb, Eye, CheckCircle, Star, Sparkles, MessageCircle, Edit3, Target } from 'lucide-react';
 
+// API configuration
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://utopai-production.up.railway.app';
+
 const Activity2 = ({ userTheme = 'superhelte', onComplete, onBack }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [stepData, setStepData] = useState({});
@@ -51,7 +54,7 @@ const Activity2 = ({ userTheme = 'superhelte', onComplete, onBack }) => {
   const startActivity = async () => {
     try {
       setLoading(true);
-      const response = await fetch('/api/activity/2/start', {
+      const response = await fetch(`${API_BASE_URL}/api/activity/2/start`, {
         method: 'POST',
         credentials: 'include'
       });
@@ -72,7 +75,7 @@ const Activity2 = ({ userTheme = 'superhelte', onComplete, onBack }) => {
   const loadStepContent = async (stepId) => {
     try {
       setLoading(true);
-      const response = await fetch(`/api/activity/2/step/${stepId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/activity/2/step/${stepId}`, {
         credentials: 'include'
       });
       
@@ -100,7 +103,7 @@ const Activity2 = ({ userTheme = 'superhelte', onComplete, onBack }) => {
   // Build prompt from parts
   const buildPromptFromParts = async () => {
     try {
-      const response = await fetch('/api/activity/2/build-prompt', {
+      const response = await fetch(`${API_BASE_URL}/api/activity/2/build-prompt`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -125,7 +128,7 @@ const Activity2 = ({ userTheme = 'superhelte', onComplete, onBack }) => {
   const testPrompt = async (prompt) => {
     try {
       setLoading(true);
-      const response = await fetch('/api/activity/2/test-prompt', {
+      const response = await fetch(`${API_BASE_URL}/api/activity/2/test-prompt`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -149,7 +152,7 @@ const Activity2 = ({ userTheme = 'superhelte', onComplete, onBack }) => {
   // Get hint
   const getHint = async () => {
     try {
-      const response = await fetch('/api/activity/2/hint', {
+      const response = await fetch(`${API_BASE_URL}/api/activity/2/hint`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
@@ -195,7 +198,7 @@ const Activity2 = ({ userTheme = 'superhelte', onComplete, onBack }) => {
         };
       }
       
-      const response = await fetch(`/api/activity/2/step/${currentStep}/submit`, {
+      const response = await fetch(`${API_BASE_URL}/api/activity/2/step/${currentStep}/submit`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',
