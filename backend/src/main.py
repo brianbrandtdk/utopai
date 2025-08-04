@@ -131,12 +131,22 @@ with app.app_context():
     from src.routes.gamification import seed_badges
     seed_badges()
 
+# Health check endpoint for Railway
+@app.route('/api/health')
+def health_check():
+    return {'status': 'healthy', 'service': 'UTOPAI Backend'}, 200
+
+# Serve static files and handle SPA routing
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
 def serve(path):
+    # If path is empty, return API info
+    if path == '':
+        return {'message': 'UTOPAI Backend API', 'status': 'running'}, 200
+    
     static_folder_path = app.static_folder
     if static_folder_path is None:
-            return "Static folder not configured", 404
+        return "Static folder not configured", 404
 
     if path != "" and os.path.exists(os.path.join(static_folder_path, path)):
         return send_from_directory(static_folder_path, path)
@@ -150,15 +160,4 @@ def serve(path):
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=True)
-
-
-# Health check endpoint for Railway
-@app.route('/api/health')
-def health_check():
-    return {'status': 'healthy', 'service': 'UTOPAI Backend'}, 200
-
-# Root endpoint
-@app.route('/')
-def root():
-    return {'message': 'UTOPAI Backend API', 'status': 'running'}, 200
 
