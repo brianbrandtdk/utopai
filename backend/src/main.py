@@ -13,6 +13,7 @@ from src.routes.activities import activities_bp
 from src.routes.activity_1 import activity_1_bp
 from src.routes.activity_2 import activity_2_bp
 from src.routes.gamification import gamification_bp
+from src.routes.init_db import init_db_bp
 
 app = Flask(__name__, static_folder=os.path.join(os.path.dirname(__file__), 'static'))
 app.config['SECRET_KEY'] = 'utopai-secret-key-2024-super-secure'
@@ -39,6 +40,7 @@ app.register_blueprint(activities_bp, url_prefix='/api')
 app.register_blueprint(activity_1_bp, url_prefix='/api')
 app.register_blueprint(activity_2_bp, url_prefix='/api')
 app.register_blueprint(gamification_bp, url_prefix='/api/gamification')
+app.register_blueprint(init_db_bp, url_prefix='/api')
 
 # Database configuration
 database_url = os.environ.get('DATABASE_URL')
