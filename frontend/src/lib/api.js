@@ -1,5 +1,5 @@
 // API configuration with environment variable support
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5002';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'https://utopai-production.up.railway.app';
 
 // API client with error handling
 class ApiClient {
