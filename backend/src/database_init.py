@@ -114,21 +114,21 @@ def init_database():
         if User.query.count() == 0:
             print("Creating test users...")
             
+            from datetime import date
+            
             test_users = [
                 User(
-                    name="Test Superhelt",
-                    username="test_barn",
-                    password_hash="pbkdf2:sha256:600000$test$test",  # password123
-                    user_type="child",
+                    username="superhelt_barn",
+                    email="superhelt@utopai.dk",
+                    date_of_birth=date(2015, 1, 1),  # 8 years old
                     chosen_theme="superhelte",
                     total_points=250,
                     current_island=1
                 ),
                 User(
-                    name="Test Prinsesse", 
-                    username="test_prinsesse",
-                    password_hash="pbkdf2:sha256:600000$test$test",  # password123
-                    user_type="child",
+                    username="prinsesse_barn",
+                    email="prinsesse@utopai.dk",
+                    date_of_birth=date(2016, 6, 15),  # 7 years old
                     chosen_theme="prinsesse",
                     total_points=180,
                     current_island=1
@@ -136,6 +136,7 @@ def init_database():
             ]
             
             for user in test_users:
+                user.set_password("password123")  # Use the proper password hashing method
                 db.session.add(user)
             
             db.session.commit()

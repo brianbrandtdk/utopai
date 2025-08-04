@@ -68,14 +68,15 @@ function App() {
   });
 
   // Login function
-  const handleLogin = async (username, password) => {
+  const handleLogin = async (email, password) => {
     try {
       setLoading(true);
       setError('');
       
       const response = await api.post('/auth/login', {
-        username,
-        password
+        email,
+        password,
+        user_type: 'child'
       });
       
       setUser(response.user);
@@ -171,7 +172,7 @@ function App() {
 
           <div className="space-y-4">
             <button
-              onClick={() => handleLogin('test_barn', 'password123')}
+              onClick={() => handleLogin('superhelt@utopai.dk', 'password123')}
               disabled={loading}
               className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-bold py-3 px-6 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 disabled:opacity-50"
             >
@@ -179,7 +180,7 @@ function App() {
             </button>
             
             <button
-              onClick={() => handleLogin('test_prinsesse', 'password123')}
+              onClick={() => handleLogin('prinsesse@utopai.dk', 'password123')}
               disabled={loading}
               className="w-full bg-gradient-to-r from-pink-500 to-purple-600 text-white font-bold py-3 px-6 rounded-lg hover:from-pink-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 disabled:opacity-50"
             >
