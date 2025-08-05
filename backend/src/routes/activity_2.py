@@ -25,7 +25,7 @@ def start_activity_2():
         
         # Get activity 2
         activity = Activity.query.filter_by(
-            title="Dit første prompt",
+            name="Dit første prompt",
             island_id=1
         ).first()
         
